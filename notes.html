@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>德州撲克學習筆記</title>
+<style>
+  :root{
+    --bg:#0f1419; --card:#1a2230;
+    --red:#e05555; --orange:#e0953a; --green:#4caf50; --blue:#4a90d9;
+    --text:#e6e9ef; --muted:#9aa6b8; --line:#2a3444;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;font-family:-apple-system,"Segoe UI","Microsoft JhengHei",sans-serif;
+    background:var(--bg);color:var(--text);line-height:1.7;font-size:16px}
+  header{padding:18px 16px 6px;text-align:center}
+  header h1{margin:0;font-size:1.35rem}
+  header p{margin:4px 0 0;color:var(--muted);font-size:.85rem}
+  .tabs{display:flex;gap:6px;padding:12px;position:sticky;top:0;background:var(--bg);
+    flex-wrap:wrap;justify-content:center;border-bottom:1px solid var(--line);z-index:10}
+  .tab{flex:1 1 auto;min-width:140px;padding:10px 12px;border:1px solid var(--line);
+    background:var(--card);color:var(--text);border-radius:10px;cursor:pointer;
+    font-size:.95rem;text-align:center;transition:.15s}
+  .tab.active{background:var(--blue);border-color:var(--blue);font-weight:700}
+  main{max-width:760px;margin:0 auto;padding:16px}
+  .panel{display:none}
+  .panel.active{display:block}
+  .block{background:var(--card);border:1px solid var(--line);border-radius:12px;
+    padding:16px 18px;margin:0 0 14px}
+  .block h2{margin:0 0 10px;font-size:1.1rem;border-left:4px solid var(--blue);padding-left:10px}
+  .block h3{margin:16px 0 6px;font-size:1rem}
+  table{width:100%;border-collapse:collapse;margin:8px 0;font-size:.92rem}
+  th,td{border:1px solid var(--line);padding:7px 9px;text-align:left}
+  th{background:#222c3c}
+  code{background:#0b0f15;padding:2px 6px;border-radius:5px;font-size:.9em;color:#ffd479}
+  ul{margin:6px 0;padding-left:22px}
+  li{margin:4px 0}
+  .tag{display:inline-block;padding:2px 10px;border-radius:20px;font-size:.8rem;font-weight:700;margin-right:6px}
+  .tag.red{background:rgba(224,85,85,.18);color:#ff8080}
+  .tag.orange{background:rgba(224,149,58,.18);color:#ffb066}
+  .tag.green{background:rgba(76,175,80,.18);color:#7fd483}
+  .muted{color:var(--muted)}
+  .summary{border-left:4px solid var(--orange);padding:10px 14px;background:#0b0f15;
+    border-radius:8px;margin:12px 0;font-weight:600}
+  footer{text-align:center;color:var(--muted);font-size:.78rem;padding:20px}
+</style>
+</head>
+<body>
+<header>
+  <h1>🃏 德州撲克學習筆記</h1>
+  <p>離線學習 / 複盤用｜純靜態頁面，雙擊即開</p>
+</header>
+
+<div class="tabs">
+  <button class="tab active" data-tab="basics">📘 基礎知識</button>
+  <button class="tab" data-tab="mindset">🧠 職業思維</button>
+  <button class="tab" data-tab="leaks">🎯 我的漏洞</button>
+</div>
+
+<main>
+<!-- ============ 基礎知識 ============ -->
+<section class="panel active" id="basics">
+  <div class="block">
+    <h2>牌型大小（由大到小）</h2>
+    <ul>
+      <li>同花順（含皇家同花順）</li>
+      <li>四條</li>
+      <li>葫蘆</li>
+      <li>同花</li>
+      <li>順子</li>
+      <li>三條</li>
+      <li>兩對</li>
+      <li>一對</li>
+      <li>高牌</li>
+    </ul>
+  </div>
+
+  <div class="block">
+    <h2>位置（越晚行動越有利）</h2>
+    <ul>
+      <li><b>早位（EP）</b>：最早行動、資訊最少 → 只打強牌。</li>
+      <li><b>中位（MP）</b>：中等。</li>
+      <li><b>晚位（CO/按鈕 BTN）</b>：最後行動、資訊最多 → 可打最寬。</li>
+      <li><b>小盲（SB）／大盲（BB）</b>：翻牌後要先行動，偏不利；大盲已投入，面對偷盲可較寬防守。</li>
+    </ul>
+    <div class="summary">位置 = 資訊 = 金錢。同一手牌，晚位能打、早位該丟。</div>
+  </div>
+
+  <div class="block">
+    <h2>底池賠率心算（面對下注時，要多少勝率才能跟）</h2>
+    <table>
+      <tr><th>對手下注</th><th>你需要的勝率</th></tr>
+      <tr><td>¼ 底池</td><td>16.7%</td></tr>
+      <tr><td>⅓ 底池</td><td>20%</td></tr>
+      <tr><td>½ 底池</td><td>25%</td></tr>
+      <tr><td>⅔ 底池</td><td>28.6%</td></tr>
+      <tr><td>滿底池</td><td>33%</td></tr>
+      <tr><td>2× 底池</td><td>40%</td></tr>
+    </table>
+    <p class="muted">公式：門檻 = 下注比例 f ÷ (1 + 2f)。記住「半池要 25%、滿池要 33%」就夠用九成場合。</p>
+  </div>
+
+  <div class="block">
+    <h2>數對子／聽牌成牌機率（2/4 法則）</h2>
+    <ul>
+      <li><b>翻牌看兩張</b>（翻牌→河牌）：成牌機率 ≈ outs × 4%</li>
+      <li><b>只看一張</b>（轉牌→河牌）：成牌機率 ≈ outs × 2%</li>
+    </ul>
+    <h3>常見聽牌的 outs</h3>
+    <ul>
+      <li>同花聽牌（4 張同花）= <b>9 outs</b>（翻牌後約 36%）</li>
+      <li>兩端順聽牌 = <b>8 outs</b>（約 32%）</li>
+      <li>卡順（gutshot）= <b>4 outs</b>（約 16%）</li>
+    </ul>
+  </div>
+
+  <div class="block">
+    <h2>翻牌前起手牌（依位置，無人進池時的開牌參考）</h2>
+    <p class="muted">這是「第一個進場」的開牌範圍，越晚位越寬。新手照這個打就能避開九成爛牌。</p>
+    <ul>
+      <li><b>早位（EP）</b>：<code>77+、AQs+、AKo、AJs、KQs</code>（很緊，只打強牌）</li>
+      <li><b>中位（MP）</b>：在早位基礎上加 <code>55+、ATs+、KJs+、QJs、AQo</code></li>
+      <li><b>晚位（CO/BTN）</b>：再加 <code>22+、A2s+、寬同花連張 54s+、KTo+、QTs+、JTs、T9s、98s</code>（按鈕最寬）</li>
+      <li><b>小盲（SB）</b>：用「加注或棄牌」，範圍接近中位但稍緊（翻牌後無位置）。</li>
+      <li><b>大盲（BB）</b>：主要看防守——面對偷盲可用很寬的範圍跟注/再加注。</li>
+    </ul>
+    <p><span class="tag red">避免</span>低位用 <code>Jxs、K3s、Q9o、A4o、74o</code> 這種弱牌進場。</p>
+  </div>
+</section>
+
+<!-- ============ 職業思維 ============ -->
+<section class="panel" id="mindset">
+  <div class="block">
+    <h2>用「範圍」思考，不要只看自己兩張牌</h2>
+    <p>職業選手不問「我這手是什麼」，而問「對手可能有哪些牌、我的牌打贏他多少比例」。對手每個動作（加注、持續下注、加碼）都在縮小他的可能範圍——越往後越強。</p>
+  </div>
+  <div class="block">
+    <h2>兇，但要有紀律</h2>
+    <p>主動下注/加注能逼對手蓋牌（這叫<b>棄牌權益</b>），是賺錢的最大來源。但「兇」要配「敢放」——<b>沒中大牌、對手表現強勢時，要踩剎車</b>。只有攻擊沒有剎車，遲早把籌碼送光。</p>
+  </div>
+  <div class="block">
+    <h2>沒中別付錢（最重要的紀律）</h2>
+    <p>強起手牌（如 AK）沒在翻牌配對，就只是一張高牌。當一個安靜的對手突然加注/下大注，<b>他通常真的有牌</b>。這時候硬跟，是新手輸最多錢的原因。<b>會放牌的人，才是長期贏家。</b></p>
+  </div>
+  <div class="block">
+    <h2>控池</h2>
+    <p>拿到「不上不下」的牌（弱兩對、中對）時，目標是<b>便宜攤牌</b>，用 check/跟注控制底池大小——別主動加注把池子養大，那只會讓你在輸的時候輸更多。</p>
+  </div>
+  <div class="block">
+    <h2>資金管理</h2>
+    <p>微注現金局至少準備 <b>20～30 個買入</b>的資金，才扛得住正常波動。打高於資金能力的級別，再強也會被波動洗出場。</p>
+  </div>
+  <div class="block">
+    <h2>控制情緒（Tilt）</h2>
+    <p>輸一手大的、被吸到，情緒會讓你想「討回來」而打得更鬆更兇——這叫 tilt，是賠錢加速器。<b>輸錢時更要打緊、或直接離桌。</b></p>
+  </div>
+</section>
+
+<!-- ============ 我的漏洞 ============ -->
+<section class="panel" id="leaks">
+  <div class="block">
+    <p class="muted">資料來源：2026/06/24 共 196 手、$0.01/$0.02 9 人桌，淨利 −$0.57。<b>幾乎整場的錢輸在一手沒放掉的 AK。</b></p>
+  </div>
+
+  <div class="block">
+    <h2>✅ 你的優點（保持）</h2>
+    <ul>
+      <li>打得兇、會加注而非軟弱跟注（PFR/VPIP 比例健康）。</li>
+      <li>強牌會下注取值（88、AK、QQ 的勝利都很漂亮）。</li>
+      <li>會用連續下注施壓收下無人要的底池。</li>
+    </ul>
+  </div>
+
+  <div class="block">
+    <h2><span class="tag red">漏洞 1</span>捨不得放牌（最貴，這場 −$3.4 都來自這裡）</h2>
+    <p><b>那手 AKd</b>：翻牌前加注，翻牌 <code>Q♦ J♣ Q♠</code>——你只有 ace-high、沒對子（只有 4 張 outs 的卡順）。</p>
+    <ul>
+      <li>兩人跟你的 c-bet（危險訊號），轉牌對手加注（危險訊號），你卻用 ace-high 跟了加注，河牌再 all-in 跟，輸給三條 Q。</li>
+      <li><b>數學</b>：轉牌被加注時你只有 ~8% 勝率，底池賠率要 ~25%。8% ≪ 25% → <b>清楚的棄牌</b>。</li>
+      <li><b>教訓</b>：AK 沒中就只是高牌。翻牌沒配對、對手表現強勢，就要敢丟。</li>
+    </ul>
+  </div>
+
+  <div class="block">
+    <h2><span class="tag orange">漏洞 2</span>進池略鬆（VPIP 25.5%，9 人桌偏高）</h2>
+    <ul>
+      <li>出現過 <code>J6s、74o、A4o、K3s</code> 這類弱牌進場。</li>
+      <li><b>目標</b>：9 人桌收緊到約 18%，照「基礎知識」的起手牌表打。</li>
+    </ul>
+  </div>
+
+  <div class="block">
+    <h2><span class="tag orange">漏洞 3</span>弱牌膨脹底池</h2>
+    <p><b>那手 86s</b>：河牌你只有弱兩對（那對 A 是公牌），對手下超小注釣你，你卻<b>加注</b>，被反加還跟，輸給 88。</p>
+    <p><b>教訓</b>：弱兩對/中對該 check 控池、便宜攤牌，不要主動加注把底池養大。</p>
+  </div>
+
+  <div class="block">
+    <div class="summary">你不是打太弱，是打太兇又不會收手。把「該放就放」練起來，你在這個級別馬上能贏錢。</div>
+  </div>
+</section>
+</main>
+
+<footer>德州撲克學習筆記 · 個人複盤用</footer>
+
+<script>
+  document.querySelectorAll(".tab").forEach(function(btn){
+    btn.addEventListener("click", function(){
+      var id = btn.dataset.tab;
+      document.querySelectorAll(".tab").forEach(function(b){ b.classList.toggle("active", b===btn); });
+      document.querySelectorAll(".panel").forEach(function(p){ p.classList.toggle("active", p.id===id); });
+      window.scrollTo(0,0);
+    });
+  });
+</script>
+</body>
+</html>
