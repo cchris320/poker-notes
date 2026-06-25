@@ -115,16 +115,53 @@
   </div>
 
   <div class="block">
-    <h2>翻牌前起手牌（依位置，無人進池時的開牌參考）</h2>
-    <p class="muted">這是「第一個進場」的開牌範圍，越晚位越寬。新手照這個打就能避開九成爛牌。</p>
-    <ul>
-      <li><b>早位（EP）</b>：<code>77+、AQs+、AKo、AJs、KQs</code>（很緊，只打強牌）</li>
-      <li><b>中位（MP）</b>：在早位基礎上加 <code>55+、ATs+、KJs+、QJs、AQo</code></li>
-      <li><b>晚位（CO/BTN）</b>：再加 <code>22+、A2s+、寬同花連張 54s+、KTo+、QTs+、JTs、T9s、98s</code>（按鈕最寬）</li>
-      <li><b>小盲（SB）</b>：用「加注或棄牌」，範圍接近中位但稍緊（翻牌後無位置）。</li>
-      <li><b>大盲（BB）</b>：主要看防守——面對偷盲可用很寬的範圍跟注/再加注。</li>
-    </ul>
+    <h2>翻前策略（一）無人進池時的開牌範圍</h2>
+    <p class="muted">「第一個進場」該開哪些牌，越晚位越寬。照這表打就能避開九成爛牌。</p>
+    <table>
+      <tr><th>位置</th><th>開牌範圍</th></tr>
+      <tr><td><b>早位 EP</b></td><td><code>77+、AQs+、AKo、AJs、KQs</code></td></tr>
+      <tr><td><b>中位 MP</b></td><td>EP ＋ <code>55+、ATs+、KJs+、QJs、AQo</code></td></tr>
+      <tr><td><b>晚位 CO/BTN</b></td><td>再加 <code>22+、A2s+、54s+、KTo+、QTs+、JTs、T9s、98s</code>（按鈕最寬）</td></tr>
+      <tr><td><b>小盲 SB</b></td><td>「加注或棄牌」，接近中位但稍緊（翻後無位置）</td></tr>
+      <tr><td><b>大盲 BB</b></td><td>主要看防守——面對偷盲可用很寬的範圍跟/再加</td></tr>
+    </table>
     <p><span class="tag red">避免</span>低位用 <code>Jxs、K3s、Q9o、A4o、74o</code> 這種弱牌進場。</p>
+  </div>
+
+  <div class="block">
+    <h2>翻前策略（二）有人先加注了，我該棄／跟／3-bet？</h2>
+    <p class="muted">前面有人加注（open），輪到你只有三個選項：棄牌、跟注、再加注（3-bet）。用「牌的強度＋位置」決定。</p>
+    <table>
+      <tr><th>你的牌</th><th>動作</th><th>原因</th></tr>
+      <tr><td><code>QQ+、AK</code></td><td><b>3-bet</b>（再加注）</td><td>最強的牌，建池、抓價值，不給對手便宜看翻牌。</td></tr>
+      <tr><td><code>22–JJ、AQ、AJs、KQs</code></td><td><b>有位置可跟</b>；無位置多半棄</td><td>小對子主要為「中三條」(set-mine)，要有位置＋夠深籌碼才划算。</td></tr>
+      <tr><td>其它（弱 A、弱同花、連張）</td><td><b>棄牌</b></td><td>面對加注沒位置又不強，跟下去只會被翻後反覆刁難。</td></tr>
+    </table>
+    <ul>
+      <li><b>set-mine 三條件</b>：① 有位置 ② 籌碼夠深（&gt;15bb）③ 加注不算太大。三者缺一就棄小對子。</li>
+      <li><b>對手已經 3-bet 我了</b>（我加注、他再加）：微注 3-bet 範圍超強（≈ <code>QQ+/AK</code>），<b>只用 AA/KK 4-bet 或全下，其餘多半棄</b>，別用 AQ、JJ 去硬碰。</li>
+    </ul>
+  </div>
+
+  <div class="block">
+    <h2>翻前策略（三）下注尺寸與規矩</h2>
+    <ul>
+      <li><b>第一個加注（open）</b>：固定 <b>3–4bb</b>。前面有人跛入（limp），每多一個跛子 <b>+1bb</b>。</li>
+      <li><b>3-bet 尺寸</b>：有位置 ≈ 對手加注的 <b>3 倍</b>；無位置 ≈ <b>4 倍</b>。</li>
+      <li><b>全下（all-in）只在兩種時機</b>：① 你籌碼淺（&lt; ~15bb）② AA/KK 捲進 4-bet 大戰。其餘情況翻前不要梭。</li>
+      <li><span class="tag red">別做</span>用「跛入」進場（軟弱、放棄主動權）、用超大注嚇跑所有人、深籌碼拿 30bb 翻前梭 KK。</li>
+    </ul>
+    <div class="summary">翻前一句話：強牌就加注/3-bet，投機小牌有位置才跟，沒中標準就棄。尺寸固定 3–4bb，別跛、別亂梭。</div>
+  </div>
+
+  <div class="block">
+    <h2>為什麼微注（$0.01/$0.02）不用背 GTO？</h2>
+    <p>網路上的 <b>GTO 翻前圖表</b>是「假設對手不犯錯」算出的完美防守。但你現在的對手會跛爛牌、A 面亂跟、河牌亂梭——<b>破綻多到爆</b>。</p>
+    <ul>
+      <li>對「會犯錯的人」用 GTO，等於放棄打他們的漏洞去防守一個不存在的完美對手，<b>反而賺更少</b>。</li>
+      <li>GTO 一堆「混合頻率」（同一手 65% 加注、35% 跟注）是雜訊，記不住也用不到。</li>
+      <li>上面這幾張簡化表，就是 GTO 的骨架。<b>先把這個打熟，等升級到能打不犯錯的對手再學 GTO（那是後話）。</b></li>
+    </ul>
   </div>
 </section>
 
